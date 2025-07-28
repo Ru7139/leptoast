@@ -10,7 +10,12 @@ fn main() {
 
 #[component]
 fn App() -> Element {
+    let mut count = use_signal(|| 0);
     rsx! {
+        h1 { "High-Five counter: {count}" }
+        button { onclick: move |_| count += 1, "Up high!" }
+        button { onclick: move |_| count -= 1, "Down low!" }
+
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: MAIN_CSS }
         Hero {}
