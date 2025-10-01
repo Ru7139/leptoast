@@ -24,7 +24,7 @@ fn CounterBlock() -> Element {
     let mut message = use_signal(|| "Goooooood".to_string());
     let mut number = use_signal(|| 725usize);
 
-    // let input_num = use_signal(|| 0i64);
+    let mut value = use_signal(|| "Hi".to_string());
 
     rsx!(
         h1 { "High-Five counter: {count}" }
@@ -42,6 +42,11 @@ fn CounterBlock() -> Element {
                 display: "flex", // display sets the layout mode of the element
                 justify_content: "center", // justify-content centers the element horizontally
                 input { type: "numbers" }
+            }
+
+            input {
+                oninput: move  |event| value.set(event.value()),
+                value: "{value}"
             }
     )
 }
