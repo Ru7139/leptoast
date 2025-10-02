@@ -3,13 +3,13 @@
 [web.app]
 
 # HTML title tag content
-title = "ness_app"
+title = "nessap.soda"
 
 # include `assets` in web platform
 [web.resource]
 
 # Additional CSS style files
-style = []
+style = ["assets/main2.css"]
 
 # Additional JavaScript files
 script = []
