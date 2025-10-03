@@ -8,8 +8,8 @@ edition = "2021"
 
 [dependencies]
 dioxus = { version = "*", features = ["fullstack"] }
-tracing-wasm = "*"
-dioxus-logger = "*"
+# tracing-wasm = "*"
+# dioxus-logger = "*"
 
 tokio = { version = "*", optional = true }
 surrealdb = { version = "*", optional = true }
