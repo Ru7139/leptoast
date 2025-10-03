@@ -3749,10 +3749,13 @@ name = "ness_app"
 version = "0.1.0"
 dependencies = [
  "dioxus",
+ "dioxus-logger",
+ "once_cell",
  "serde",
  "serde_json",
  "surrealdb",
  "tokio",
+ "tracing-wasm",
 ]
 
 [[package]]

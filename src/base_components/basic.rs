@@ -50,3 +50,38 @@ pub fn additional_css_file() -> Element {
         }
     )
 }
+
+#[derive(Clone, PartialEq)]
+pub struct Rocket {
+    pub type_code: char,
+    pub code: u32,
+    pub name: String,
+}
+
+pub static ROCKET_DEMO: once_cell::sync::Lazy<Rocket> = once_cell::sync::Lazy::new(|| Rocket {
+    type_code: 'A',
+    code: 1405,
+    name: String::from("Pole"),
+});
+
+#[component]
+pub fn props(fire_rocket: ReadOnlySignal<Rocket>) -> Element {
+    let r = &*fire_rocket.read();
+
+    rsx!(
+        h1 { "This is Rocket {r.type_code.to_string()}{r.code.to_string()} named {r.name.clone()}" }
+    )
+}
+
+#[component]
+pub fn conditional_render(show_flag: bool) -> Element {
+    rsx!(
+        div {
+            if show_flag {
+                p { "show flag is {show_flag}" }
+            } else {
+                p { "show flag bool is {show_flag}" }
+            }
+        }
+    )
+}

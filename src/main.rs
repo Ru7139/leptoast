@@ -20,5 +20,8 @@ fn App() -> Element {
         bcb::html_header {}
         bcb::attributes {}
         bcb::additional_css_file {}
+        bcb::props { fire_rocket: bcb::ROCKET_DEMO.clone() }
+        bcb::conditional_render { show_flag: true }
+
     )
 }
