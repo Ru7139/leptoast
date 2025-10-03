@@ -9,7 +9,7 @@ title = "nessap.soda"
 [web.resource]
 
 # Additional CSS style files
-style = ["assets/main2.css"]
+style = []
 
 # Additional JavaScript files
 script = []
