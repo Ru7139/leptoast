@@ -85,3 +85,34 @@ pub fn conditional_render(show_flag: bool) -> Element {
         }
     )
 }
+
+// #[component]
+// pub fn onclick_event() -> Element {
+//     rsx!(
+//         button {
+//             onclick : move |_e| { dioxus_logger::tracing::info!("onclick event") }, "click"
+//         }
+//     )
+// }
+
+#[component]
+pub fn use_signal_to_click() -> Element {
+    let mut count = use_signal(|| 0isize);
+
+    rsx!(
+        div {
+            h3 { "count: {count}" }
+            button { onclick: move |_e| count += 1, "+= 1" }
+            button { onclick: move |_e| count.set(0), "reset" }
+            button { onclick: move |_e| count -= 1, "-= 1"}
+        }
+    )
+}
+
+pub static STRING_NOTHING: once_cell::sync::Lazy<String> =
+    once_cell::sync::Lazy::new(|| "nothing".to_string());
+
+#[component]
+pub fn use_context_from_app(value: String) -> Element {
+    rsx!( h3 { "string value from app: {value}" } )
+}

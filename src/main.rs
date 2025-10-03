@@ -22,6 +22,9 @@ fn App() -> Element {
         bcb::additional_css_file {}
         bcb::props { fire_rocket: bcb::ROCKET_DEMO.clone() }
         bcb::conditional_render { show_flag: true }
+        // bcb::onclick_event {}
+        bcb::use_signal_to_click {}
+        bcb::use_context_from_app { value: bcb::STRING_NOTHING.clone() }
 
     )
 }
