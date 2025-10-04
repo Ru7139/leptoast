@@ -7,9 +7,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-dioxus = { version = "*", features = ["fullstack"] }
-# tracing-wasm = "*"
-# dioxus-logger = "*"
+dioxus = { version = "*", features = ["fullstack", "router"] }
+tracing-wasm = "*"
+dioxus-logger = "*"
 
 tokio = { version = "*", optional = true }
 surrealdb = { version = "*", optional = true }
