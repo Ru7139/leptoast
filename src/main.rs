@@ -25,6 +25,11 @@ fn App() -> Element {
         // bcb::onclick_event {}
         bcb::use_signal_to_click {}
         bcb::use_context_from_app { value: bcb::STRING_NOTHING.clone() }
+        bcb::hidden_attribute_and_conditional_class {}
+        bcb::list_cop {}
+        bcb::oninput_event {}
+
+        Router::<bcb::Route> {}
 
     )
 }

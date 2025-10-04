@@ -13,9 +13,7 @@ pub fn dynamic_text() -> Element {
     rsx!(
         div {
             p { "message: {msg}, number: {num}" }
-
         }
-
     )
 }
 
@@ -115,4 +113,74 @@ pub static STRING_NOTHING: once_cell::sync::Lazy<String> =
 #[component]
 pub fn use_context_from_app(value: String) -> Element {
     rsx!( h3 { "string value from app: {value}" } )
+}
+
+#[component]
+pub fn hidden_attribute_and_conditional_class() -> Element {
+    let condition = false;
+
+    rsx!(
+        div {
+            hidden: condition, "This is a hiddened message",
+        }
+
+        div {
+            class: if condition {"bcd"} else {"cde"}, "use condition to display",
+        }
+    )
+}
+
+#[component]
+pub fn list_cop() -> Element {
+    let v1 = vec!["a", "b", "c", "d", "e"];
+
+    rsx!(
+        for i in 1..=3 { div { "for [{i}]" } }
+
+        { v1.iter().enumerate().map(|(index, x)| rsx!( p { "v1.iter().enumerate(): [{index}] ---> {x}" } )) }
+    )
+}
+
+#[component]
+pub fn oninput_event() -> Element {
+    let mut message = use_signal(|| "".to_string());
+
+    rsx!(
+        h3 { "message : {message}" }
+
+        // real-time feedback
+        input {r#type: "text", oninput: move |msg| message.set(msg.value())}
+    )
+}
+
+#[derive(Routable, PartialEq, Clone)] // use this way to show different page
+pub enum Route {
+    #[route("/bethalmen")]
+    Bethalmen {}, // func name must be from uppercase
+
+    #[route("/caesalmen")]
+    Caesalmen {},
+
+    #[route("/:..a")]
+    Pagenotfound { a: Vec<String> },
+}
+
+#[component]
+pub fn Bethalmen() -> Element {
+    rsx!( p { "The Bethalmen" })
+}
+
+#[component]
+pub fn Caesalmen() -> Element {
+    rsx!( p { "The caesalmen" })
+}
+
+#[component]
+pub fn Pagenotfound(a: Vec<String>) -> Element {
+    rsx!(
+        h1 { "404 NOT FOUND" }
+        for i in a {
+            p { "{i}" }
+        }
+    )
 }
