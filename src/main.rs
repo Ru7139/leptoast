@@ -30,6 +30,5 @@ fn App() -> Element {
         bcb::oninput_event {}
 
         Router::<bcb::Route> {}
-
     )
 }
