@@ -158,8 +158,8 @@ pub enum Route {
     #[route("/bethalmen")]
     Bethalmen {}, // func name must be from uppercase
 
-    #[route("/caesalmen")]
-    Caesalmen {},
+    #[route("/caesalmen/:id")]
+    Caesalmen { id: i32 },
 
     #[route("/:..a")]
     Pagenotfound { a: Vec<String> },
@@ -167,12 +167,35 @@ pub enum Route {
 
 #[component]
 pub fn Bethalmen() -> Element {
-    rsx!( p { "The Bethalmen" })
+    let navigator = use_navigator();
+
+    rsx!(
+        p { "The Bethalmen" }
+        Link { to: Route::Caesalmen { id: 255 }, "Casesalmen@255" }
+        button { onclick: move  |_| navigator.go_back(), "go back" }
+        p { }
+    )
 }
 
 #[component]
-pub fn Caesalmen() -> Element {
-    rsx!( p { "The caesalmen" })
+pub fn Caesalmen(id: i32) -> Element {
+    let navigator = use_navigator();
+
+    rsx!(
+        p { "The caesalmen -- {id}" }
+        Link { to: Route::Bethalmen { }, "way back to bethalmen" }
+
+        button {
+            onclick: move |_| {
+                match navigator.push(Route::Caesalmen { id: 65535 }) {
+                    None => (),
+                    Some(f) => println!("navigate_usage: {:?}", f)
+                }
+            }, " go to the caesalmen 65535"
+        }
+
+        p { }
+    )
 }
 
 #[component]
@@ -180,7 +203,7 @@ pub fn Pagenotfound(a: Vec<String>) -> Element {
     rsx!(
         h1 { "404 NOT FOUND" }
         for i in a {
-            p { "{i}" }
+            p { "no page for {i}" }
         }
     )
 }
