@@ -1,6 +1,6 @@
 [package]
 name = "ness_app"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Ru7139 <166471914+Ru7139@users.noreply.github.com>"]
 edition = "2021"
 
