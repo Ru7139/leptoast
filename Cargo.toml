@@ -1,23 +1,17 @@
 [package]
-name = "ness_app"
-version = "0.1.1"
+name = "dioxusap"
+version = "0.1.0"
 authors = ["Ru7139 <166471914+Ru7139@users.noreply.github.com>"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-dioxus = { version = "*", features = ["fullstack", "router"] }
-tracing-wasm = "*"
-dioxus-logger = "*"
-
-tokio = { version = "*", optional = true }
-surrealdb = { version = "*", optional = true }
+dioxus = { version = "*", features = ["router", "fullstack"] }
+tokio = { version = "*", features = ["full"], optional = true }
+surrealdb = { version = "*", features = [], optional = true }
 
 serde = { version = "*", features = ["derive"] }
-serde_json = "*"
-once_cell = "*"
-
 
 
 [features]
@@ -25,7 +19,7 @@ default = ["web"]
 web = ["dioxus/web"]
 desktop = ["dioxus/desktop"]
 mobile = ["dioxus/mobile"]
-# server = ["dioxus/server", "dep:tokio", "dep:surrealdb"]
+server = ["surrealdb"]
 
 [profile]
 
