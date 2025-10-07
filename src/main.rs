@@ -1,16 +1,8 @@
-use leptos::prelude::*;
-use leptos::{IntoView, mount};
+mod app_iteself;
+mod simple_on_page_item;
 
 fn main() {
-    mount::mount_to_body(app_0);
-}
+    console_error_panic_hook::set_once();
 
-fn app_0() -> impl IntoView {
-    let (count, set_count) = signal(0);
-
-    view! {
-        <p>"Here is the leptos"</p>
-        <p>"Count: " {count}</p>
-        <button on:click = move |_| set_count.set(count.get() + 1)> "Click me"  </button>
-    }
+    leptos::mount::mount_to_body(app_iteself::app::App)
 }
