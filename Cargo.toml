@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 leptos = { version = "*", features = ["csr"] }
+# log = "*"
+# console_log = "*"
+console_error_panic_hook = "*"
