@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
-    <head><link rel="modulepreload" href="/leptoast-61eeb1c45115cc40.js" crossorigin="anonymous" integrity="sha384-IhPg/rVGcurEemdR3ZGCtmK6AKDWmmIy6pOKCuj7St23/0iFZETBHNTTgiFEHqZW"><link rel="preload" href="/leptoast-61eeb1c45115cc40_bg.wasm" crossorigin="anonymous" integrity="sha384-LIQ4mv0BCGHraXmsOBNlH7uZ/iGDmTKLyWgskLTkpzy3gq5UEG8eNofMYAZ3sszb" as="fetch" type="application/wasm"></head>
+    <head><link rel="modulepreload" href="/leptoast-68e5026fde32f1f8.js" crossorigin="anonymous" integrity="sha384-fPt/LjGm2MTLM4exAQyqC3du9GLSB8Vn2L8Goz/IvmUFmXqcCQpoCLUW8NM8EUgx"><link rel="preload" href="/leptoast-68e5026fde32f1f8_bg.wasm" crossorigin="anonymous" integrity="sha384-TWnU9H7DpmLSjJlyaE0kOt8hXTyL8V+hGJ+n3R0lH5zv7/97wZ1gr1zHOo5xhf9i" as="fetch" type="application/wasm"></head>
     <body>
 <script type="module">
-import init, * as bindings from '/leptoast-61eeb1c45115cc40.js';
-const wasm = await init({ module_or_path: '/leptoast-61eeb1c45115cc40_bg.wasm' });
+import init, * as bindings from '/leptoast-68e5026fde32f1f8.js';
+const wasm = await init({ module_or_path: '/leptoast-68e5026fde32f1f8_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -143,3 +143,15 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 })()
 </script></body>
 </html>
+
+<style>
+    .red {
+        color: red;
+    }
+    .blue {
+        color: blue;
+    }
+    .green {
+        color: green;
+    }
+</style>
