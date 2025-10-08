@@ -25,7 +25,35 @@ pub fn VecViewBasic(times: usize) -> impl IntoView {
     }
 }
 
-// pub fn For_view(times: usize) -> impl IntoView {
-//     view! {}
+// #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+// struct Kounter {
+//     id: usize,
+//     count: RwSignal<i32>,
 // }
+
+#[component]
+pub fn Forview() -> impl IntoView {
+    view! {
+        <p> "---> For_view() : for" </p>
+        <p> "The document of this chapter is confused" </p>
+    }
+
+    // let kk = Kounter {
+    //     id: 3,
+    //     count: RwSignal::new(0),
+    // };
+
+    // let (show_y, _send_x) = signal::<Vec<Kounter>>(vec![]);
+
+    // view! {
+    //     <p> "---> For_view() : for" </p>
+
+    //     <ForEnumerate
+    //         each = move || show_y.get()
+    //         key = |k| k.id
+    //         children = { move |index: ReadSignal<usize>, counter: Kounter| { view!
+    //             { <button> {move || index.get()} ". Value: " {move || counter.count.get()} </button>
+    //         } } }
+    //     />
+    // }
 }
