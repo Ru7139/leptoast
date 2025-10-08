@@ -25,7 +25,7 @@ pub fn VecViewBasic(times: usize) -> impl IntoView {
     }
 }
 
-// #[component]
 // pub fn For_view(times: usize) -> impl IntoView {
 //     view! {}
 // }
+}
