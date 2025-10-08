@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 
 #[component]
-pub fn Vec_View_Basic(times: usize) -> impl IntoView {
+pub fn VecViewBasic(times: usize) -> impl IntoView {
     let vek = (1..=times).step_by(1).collect::<Vec<usize>>();
 
     let counters = (1..=times).map(|idx| RwSignal::new(idx));
