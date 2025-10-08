@@ -9,8 +9,7 @@ use super::super::simple_on_page_item::{
 pub fn App() -> impl IntoView {
     view! {
         <div>
-            <Hello/>
-            <TheCouter initial_value=0 step_value=1/>
+            <Vec_View_Basic times=3/>
             <ShowDifferentColor/>
             <TheCouter initial_value=0 step_value=1/>
             <Hello/>
