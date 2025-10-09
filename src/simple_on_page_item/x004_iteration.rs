@@ -25,35 +25,40 @@ pub fn VecViewBasic(times: usize) -> impl IntoView {
     }
 }
 
-// #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-// struct Kounter {
-//     id: usize,
-//     count: RwSignal<i32>,
-// }
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct Kounter {
+    index: usize,
+    count: RwSignal<i32>,
+}
 
 #[component]
 pub fn Forview() -> impl IntoView {
+    let (show_y, _send_x) = signal::<Vec<Kounter>>(vec![Kounter {
+        index: 3,
+        count: RwSignal::new(0),
+    }]);
+
     view! {
         <p> "---> For_view() : for" </p>
-        <p> "The document of this chapter is confused" </p>
+        // <p> "The document of this chapter is confused" </p>
+
+        <ForEnumerate
+            each = move || show_y.get()
+            key = |k| k.index
+            children = move |i, k|
+            {
+                view! {
+                        <p> "Index: " {i} " - Count: " {move || k.count.get()} </p>
+                        <button on:click=move |_| k.count.update(|v| *v += 1)>
+                            {move || format!("Value: {}", k.count.get())}
+                        </button>
+                }
+            }
+            />
+
+
+            // <button { move || kc.id } > "Value: " {move || child..get()} </button>
+
+        // </ ForEnumerate>
     }
-
-    // let kk = Kounter {
-    //     id: 3,
-    //     count: RwSignal::new(0),
-    // };
-
-    // let (show_y, _send_x) = signal::<Vec<Kounter>>(vec![]);
-
-    // view! {
-    //     <p> "---> For_view() : for" </p>
-
-    //     <ForEnumerate
-    //         each = move || show_y.get()
-    //         key = |k| k.id
-    //         children = { move |index: ReadSignal<usize>, counter: Kounter| { view!
-    //             { <button> {move || index.get()} ". Value: " {move || counter.count.get()} </button>
-    //         } } }
-    //     />
-    // }
 }
