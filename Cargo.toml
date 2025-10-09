@@ -5,6 +5,6 @@ edition = "2024"
 
 [dependencies]
 leptos = { version = "*", features = ["csr"] }
-
+reactive_stores = "*"
 
 console_error_panic_hook = "*"
