@@ -26,12 +26,10 @@ pub fn ComplexDataIter() -> impl IntoView {
         <p> "---> ComplexDataIter()" </p>
         <button on:click = move |_| {
             set_data.update(|data| {
-                for row in data { row.value += 13; }
+                for row in data { row.value += 2; }
             });
-
             leptos::logging::log!("{:?}", data.get());
-
-        }> "Update Values" </button>
+        }> "Update Values +2" </button>
 
         <For
             each = move || data.get()
@@ -72,7 +70,7 @@ pub fn BetterIterA() -> impl IntoView {
                 row.subfec.update(|x| *x += 3);
             }
             leptos::logging::log!("{:?}", data.get())
-        }> "Update Values" </button>
+        }> "Update Values +3" </button>
 
         <For
             each = move || data.get()
