@@ -15,7 +15,7 @@ impl DatabaseEntry {
 }
 
 #[component]
-pub fn complex_data_iter() -> impl IntoView {
+pub fn ComplexDataIter() -> impl IntoView {
     let (data, set_data) = signal(Vec::from([
         DatabaseEntry::new("aeiot", 15),
         DatabaseEntry::new("bezwy", 32),
@@ -23,7 +23,7 @@ pub fn complex_data_iter() -> impl IntoView {
     ]));
 
     view! {
-        <p> "---> complex_data_iter()" </p>
+        <p> "---> ComplexDataIter()" </p>
         <button on:click = move |_| {
             set_data.update(|data| {
                 for row in data { row.value += 13; }
