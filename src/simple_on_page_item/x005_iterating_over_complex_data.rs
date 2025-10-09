@@ -83,5 +83,41 @@ pub fn BetterIterA() -> impl IntoView {
         </For>
     }
 }
+
+#[component]
+pub fn BetterIterMemo() -> impl IntoView {
+    type Bi32 = BasementData<i32>;
+    let (data, _set_data): (ReadSignal<Vec<Bi32>>, WriteSignal<Vec<Bi32>>) =
+        signal(Vec::<BasementData<i32>>::from([
+            BasementData::new("Hoak", 22),
+            BasementData::new("Poyoz", 45),
+            BasementData::new("Menduet", 10),
+        ]));
+
+    view! {
         <p> "---> BetterIterMemo()" </p>
+        <button on:click = move |_| {
+            for row in &*data.read() {
+                row.subfec.update(|x| *x += 4);
+            }
+            leptos::logging::log!("{:?}", data.get())
+        }> "Update Values +4" </button>
+
+        <For
+            each = move || data.get().into_iter().enumerate()
+            key = |(_, state)| state.name.clone() // 当data变化时，Memo会重新计算
+            children = move |(index, bacet)| { // 当data内被删除一个对象，Memo也会立即触发一次
+                let value = Memo::new(move |_| { // 如果此处的计算量过大，则应尽可能使用反应信号嵌套
+                    data.with(|vec_basement|
+                        vec_basement.get(index)
+                            .map(|d| d.subfec)
+                            .unwrap_or(RwSignal::new(-1i32)))
+                });
+                view! {
+                    <p> {bacet.name}": "{value} </p>
+                }
+            }
+        />
+    }
+}
         <h3> "---> MaybeBestIterStores()" </h3>
