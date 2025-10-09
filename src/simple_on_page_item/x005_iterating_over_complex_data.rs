@@ -120,4 +120,58 @@ pub fn BetterIterMemo() -> impl IntoView {
         />
     }
 }
+
+use reactive_stores::Store;
+
+#[derive(Debug, Clone, Store)]
+struct TrsData {
+    #[store(key: String = |roc| roc.name.clone())]
+    octpusline: Vec<ShipCrate>,
+}
+
+#[derive(Debug, Clone, Store)]
+struct ShipCrate {
+    name: String,
+    inside_item_price: u32,
+}
+impl ShipCrate {
+    fn new(naming: &str, inside_item_price: u32) -> ShipCrate {
+        ShipCrate {
+            name: naming.into(),
+            inside_item_price,
+        }
+    }
+}
+
+use reactive_stores::StoreFieldIterator;
+
+#[component]
+pub fn MaybeBestIterStores() -> impl IntoView {
+    let vec = Vec::from([
+        ShipCrate::new("Aurona", 12),
+        ShipCrate::new("Nuoda", 23),
+        ShipCrate::new("Torita", 34),
+    ]);
+
+    let saving_data = Store::new(TrsData { octpusline: vec });
+
+    view! {
         <h3> "---> MaybeBestIterStores()" </h3>
+        <button on:click = move |_| {
+            for r in saving_data.octpusline().iter_unkeyed() {
+                *r.inside_item_price().write() += 5;
+            }
+            leptos::logging::log!("{:?}", saving_data.get());
+        }> "Update Values +5" </button>
+
+        <For
+            each = move || saving_data.octpusline()
+            key = |row| row.read().name.clone() // 无需手动创造嵌套新号
+            children = |child| { // 新的api，可能存在bug
+                let name = child.read().name.clone();
+                let value = child.inside_item_price();
+                view! { <p> {name} ": " {move || value.get()} </p>}
+            }
+        />
+    }
+}
