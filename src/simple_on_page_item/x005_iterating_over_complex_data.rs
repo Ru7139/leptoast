@@ -156,7 +156,7 @@ pub fn MaybeBestIterStores() -> impl IntoView {
     let saving_data = Store::new(TrsData { octpusline: vec });
 
     view! {
-        <h3> "---> MaybeBestIterStores()" </h3>
+        <h2> "---> MaybeBestIterStores()" </h2>
         <button on:click = move |_| {
             for r in saving_data.octpusline().iter_unkeyed() {
                 *r.inside_item_price().write() += 5;
