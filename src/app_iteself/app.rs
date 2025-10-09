@@ -8,12 +8,16 @@ use super::super::simple_on_page_item::{
     x005_iterating_over_complex_data::{
         BetterIterA, BetterIterMemo, ComplexDataIter, MaybeBestIterStores,
     },
+    x006_forms_and_inputs::{ControlledInputsV0, ControlledInputsV1, ControlledInputsV2},
 };
 
 #[component]
 pub fn App() -> impl IntoView {
     view! {
         <div>
+            <ControlledInputsV2/>
+            <ControlledInputsV1/>
+            <ControlledInputsV0/>
             <MaybeBestIterStores/>
             <BetterIterMemo/>
             <BetterIterA/>
