@@ -65,6 +65,7 @@ pub fn BetterIterA() -> impl IntoView {
     ]));
 
     view! {
+        <p> "---> BetterIterA()" </p>
         <button on:click = move |_| {
             for row in &*data.read() {
                 row.subfec.update(|x| *x += 3);
@@ -81,3 +82,5 @@ pub fn BetterIterA() -> impl IntoView {
         </For>
     }
 }
+        <p> "---> BetterIterMemo()" </p>
+        <h3> "---> MaybeBestIterStores()" </h3>
