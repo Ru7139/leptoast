@@ -66,3 +66,31 @@ pub fn ControlledInputsV1() -> impl IntoView {
     }
 }
 
+#[component]
+pub fn ControlledInputsV2() -> impl IntoView {
+    let (rx_name, tx_name) = signal("Uncontrolled".to_string());
+    let input_element: NodeRef<leptos::html::Input> = NodeRef::new();
+
+    let on_submit = move |ev: SubmitEvent| {
+        ev.prevent_default();
+
+        let value = input_element
+            .get()
+            .expect("<input> should be mounted")
+            .value();
+        tx_name.set(value);
+    };
+
+    view! {
+        <h3> "---> ControlledInputsV2()" </h3> // 不立即显示的<input>
+        <form on:submit = on_submit>
+            <input type = "text"
+                value = rx_name
+                node_ref = input_element
+            />
+            <input type = "submit" value= "Submit"/> // 贴在<input>旁边，显示Submit
+        </form>
+
+        <p> "Name is: " {rx_name} </p>
+    }
+}
