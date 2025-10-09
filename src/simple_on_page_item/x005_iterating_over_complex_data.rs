@@ -75,8 +75,9 @@ pub fn BetterIterA() -> impl IntoView {
 
         <For
             each = move || data.get()
-            key = |state| state.name.clone()
-            let(child)
+            key = |state| state.name.clone() // 这种方式很有效
+            let(child) // 缺点在于如果无法控制接收到的数据类型时，可能造成麻烦
+
         >
         <p> {child.subfec} </p>
         </For>
