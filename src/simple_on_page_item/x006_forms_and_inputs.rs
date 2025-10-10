@@ -110,3 +110,26 @@ pub fn TextareaSpecial() -> impl IntoView {
     }
 }
 
+#[component]
+pub fn SelectSpecial() -> impl IntoView {
+    let (rx_data, tx_data) = signal(0i32);
+
+    view! {
+        <h3> "---> SelectSpecial()" </h3>
+        <select
+            on:change:target = move |ev| {
+                tx_data.set(ev.target().value().parse().unwrap());
+            }
+            prop:value = move || rx_data.get().to_string()
+        >
+            <option value = "0"> "0" </option>
+            <option value = "1"> "1" </option>
+            <option value = "2"> "2" </option>
+        </select>
+        <button on:click = move |_| tx_data.update(|n| {
+            if *n == 2 {*n = 0;} else { *n += 1;}
+            // 显示1的时候，点击后n+1，显示2，再点击后2->0
+        })> "Next Option"
+        </button>
+    }
+}
