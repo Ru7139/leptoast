@@ -94,3 +94,19 @@ pub fn ControlledInputsV2() -> impl IntoView {
         <p> "Name is: " {rx_name} </p>
     }
 }
+
+#[component]
+pub fn TextareaSpecial() -> impl IntoView {
+    let (rx_data, tx_data) = signal("Put your idea here".to_string());
+
+    view! {
+        <h3> "---> TextareaSpecial()" </h3>
+        <textarea
+            prop:value = move || rx_data.get()
+            on:input:target = move |ev| tx_data.set(ev.target().value())
+        >
+            {rx_data}
+        </textarea>
+    }
+}
+
