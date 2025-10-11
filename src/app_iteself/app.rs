@@ -11,13 +11,14 @@ use super::super::simple_on_page_item::{
     x006_forms_and_inputs::{
         ControlledInputsV0, ControlledInputsV1, ControlledInputsV2, SelectSpecial, TextareaSpecial,
     },
-    x007_control_flow::IfControl,
+    x007_control_flow::{BetterUseShow, IfControl},
 };
 
 #[component]
 pub fn App() -> impl IntoView {
     view! {
         <div>
+            <BetterUseShow/>
             <IfControl/>
             <SelectSpecial/>
             <TextareaSpecial/>
