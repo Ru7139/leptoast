@@ -29,6 +29,38 @@ pub fn IfControl() -> impl IntoView {
     view! {
         <h3> "---> IfControl()" </h3>
 
+        <p> { rx_data } </p>
+
+        <span>   "---> if itself: "  </span>
+        <p style="display: inline;"> {
+            move || if data_recieved_is_odd_0() { "Odd" }
+                else { "Even" }
+            } </p> <br/>
+
+        <span> "---> if with Option<T>: " </span>
+        <p style="display: inline;"> {
+            odd_or_even_msg_v1 }
+        </p> <br/>
+
+        <span> "---> if with Option<T> with bool::then(): " </span>
+        <p style="display: inline;"> {
+            odd_or_even_msg_v2 }
+        </p> <br/>
+
+        <span> "---> also match: " </span>
+        <p style="display: inline;"> {
+            odd_or_even_msg_v3 }
+        </p> <br/>
+
+        <button on:click = move |_|
+            tx_data.update(|x| *x += 1)>
+                "+1 on data"
+        </button>
+    }
+}
+
+#[rustfmt::skip]
+#[component]
 pub fn BetterUseShow() -> impl IntoView {
     let (rx_data, tx_data) = signal(0u32);
     fn DataIsBig() -> impl IntoView { view! {<p> "Big" </p>} }
