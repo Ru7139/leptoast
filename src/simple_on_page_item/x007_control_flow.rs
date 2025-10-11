@@ -3,7 +3,28 @@ use leptos::prelude::*;
 #[component]
 pub fn IfControl() -> impl IntoView {
     let (rx_data, tx_data) = signal(0u32);
-    let data_recieved_is_odd = move || -> bool { rx_data.get() % 2 != 0 };
+    let data_recieved_is_odd_0 = move || -> bool { rx_data.get() % 2 != 0 };
+    let odd_or_even_msg_v1 = move || -> Option<&'static str> {
+        if data_recieved_is_odd_0() {
+            Some("it is odd")
+        } else {
+            Some("it is not odd")
+        }
+    };
+
+    let odd_or_even_msg_v2 = move || -> Option<&'static str> {
+        data_recieved_is_odd_0().then(|| "that is an odd number")
+    };
+
+    let odd_or_even_msg_v3 = move || -> &'static str {
+        match rx_data.get() {
+            0 => "Zero",
+            1 => "One",
+            _x if data_recieved_is_odd_0() => "x -> Odd",
+            _y if !data_recieved_is_odd_0() => "x -> Even",
+            _ => unreachable!(),
+        }
+    };
 
     view! {
         <h3> "---> IfControl()" </h3>
