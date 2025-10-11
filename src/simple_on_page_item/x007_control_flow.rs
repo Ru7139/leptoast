@@ -76,7 +76,6 @@ pub fn BetterUseShow() -> impl IntoView {
         </Show>
 
         <span> {rx_data} " " </span>
-
         <button on:click = move |_|
                 tx_data.update(|x| *x += 1)>
             " +1 button"
