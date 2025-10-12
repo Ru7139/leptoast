@@ -12,12 +12,14 @@ use super::super::simple_on_page_item::{
         ControlledInputsV0, ControlledInputsV1, ControlledInputsV2, SelectSpecial, TextareaSpecial,
     },
     x007_control_flow::{BetterUseShow, IfControl},
+    x008_error_handle::NumericInput,
 };
 
 #[component]
 pub fn App() -> impl IntoView {
     view! {
         <div>
+            <NumericInput/>
             <BetterUseShow/>
             <IfControl/>
             <SelectSpecial/>
