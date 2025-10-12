@@ -63,16 +63,17 @@ pub fn IfControl() -> impl IntoView {
 #[component]
 pub fn BetterUseShow() -> impl IntoView {
     let (rx_data, tx_data) = signal(0u32);
-    fn DataIsBig() -> impl IntoView { view! {<p> "Big" </p>} }
-    fn DataIsSmall() -> impl IntoView { view! {<p> "Small" </p>} }
+
+    // fn DataIsBig() -> impl IntoView { view! {<p> "Big" </p>} }
+    // fn DataIsSmall() -> impl IntoView { view! {<p> "Small" </p>} }
 
     view! {
         <h3> "---> BetterUseShow()" </h3>
         <Show // 只会渲染1次，不会反复渲染
             when = move || { rx_data.get() <= 5 }
-            fallback = || view! { <DataIsBig/> }
+            fallback = || view! { <p> "Big" </p> }
         >
-            <DataIsSmall/> // 包括这里也只会渲染1次
+            <p> "Small" </p> // 包括这里也只会渲染1次
         </Show>
 
         <span> {rx_data} " " </span>
