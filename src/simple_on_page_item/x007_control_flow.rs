@@ -27,35 +27,37 @@ pub fn IfControl() -> impl IntoView {
     };
 
     view! {
-        <h3> "---> IfControl()" </h3>
+        <div>
+            <h3> "---> IfControl()" </h3>
 
-        <p> { rx_data } </p>
+            <p> { rx_data } </p>
 
-        <span>   "---> if itself: "  </span>
-        <p style="display: inline;"> {
-            move || if data_recieved_is_odd_0() { "Odd" }
-                else { "Even" }
-            } </p> <br/>
+            <span>   "---> if itself: "  </span>
+            <p style="display: inline;"> {
+                move || if data_recieved_is_odd_0() { "Odd" }
+                    else { "Even" }
+                } </p> <br/>
 
-        <span> "---> if with Option<T>: " </span>
-        <p style="display: inline;"> {
-            odd_or_even_msg_v1 }
-        </p> <br/>
+            <span> "---> if with Option<T>: " </span>
+            <p style="display: inline;"> {
+                odd_or_even_msg_v1 }
+            </p> <br/>
 
-        <span> "---> if with Option<T> with bool::then(): " </span>
-        <p style="display: inline;"> {
-            odd_or_even_msg_v2 }
-        </p> <br/>
+            <span> "---> if with Option<T> with bool::then(): " </span>
+            <p style="display: inline;"> {
+                odd_or_even_msg_v2 }
+            </p> <br/>
 
-        <span> "---> also match: " </span>
-        <p style="display: inline;"> {
-            odd_or_even_msg_v3 }
-        </p> <br/>
+            <span> "---> also match: " </span>
+            <p style="display: inline;"> {
+                odd_or_even_msg_v3 }
+            </p> <br/>
 
-        <button on:click = move |_|
-            tx_data.update(|x| *x += 1)>
-                "+1 on data"
-        </button>
+            <button on:click = move |_|
+                tx_data.update(|x| *x += 1)>
+                    "+1 on data"
+            </button>
+        </div>
     }
 }
 
@@ -68,18 +70,20 @@ pub fn BetterUseShow() -> impl IntoView {
     // fn DataIsSmall() -> impl IntoView { view! {<p> "Small" </p>} }
 
     view! {
-        <h3> "---> BetterUseShow()" </h3>
-        <Show // 只会渲染1次，不会反复渲染
-            when = move || { rx_data.get() <= 5 }
-            fallback = || view! { <p> "Big" </p> }
-        >
-            <p> "Small" </p> // 包括这里也只会渲染1次
-        </Show>
+        <div>
+            <h3> "---> BetterUseShow()" </h3>
+            <Show // 只会渲染1次，不会反复渲染
+                when = move || { rx_data.get() <= 5 }
+                fallback = || view! { <p> "Big" </p> }
+            >
+                <p> "Small" </p> // 包括这里也只会渲染1次
+            </Show>
 
-        <span> {rx_data} " " </span>
-        <button on:click = move |_|
-                tx_data.update(|x| *x += 1)>
-            " +1 button"
-        </button>
+            <span> {rx_data} " " </span>
+            <button on:click = move |_|
+                    tx_data.update(|x| *x += 1)>
+                " +1 button"
+            </button>
+        </div>
     }
 }

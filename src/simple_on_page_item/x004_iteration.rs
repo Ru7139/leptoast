@@ -14,14 +14,16 @@ pub fn VecViewBasic(times: usize) -> impl IntoView {
         .collect_view();
 
     view! {
-        <p> "---> Vec_view()" </p>
-        <p > {vek.clone()} </p> // 渲染123...times
-        <ul>
-            {vek.into_iter().map(|x| view! { <li>{x}</li>}).collect_view() }
-            // 渲染 ·1 ·2 ·3 ...... ·times
-        </ul>
-        <br/>
-        <ul> {counters_buttons} </ul>
+        <div>
+            <p> "---> Vec_view()" </p>
+            <p > {vek.clone()} </p> // 渲染123...times
+            <ul>
+                {vek.into_iter().map(|x| view! { <li>{x}</li>}).collect_view() }
+                // 渲染 ·1 ·2 ·3 ...... ·times
+            </ul>
+            <br/>
+            <ul> {counters_buttons} </ul>
+        </div>
     }
 }
 
@@ -39,26 +41,25 @@ pub fn Forview() -> impl IntoView {
     }]);
 
     view! {
-        <p> "---> For_view() : for" </p>
-        // <p> "The document of this chapter is confused" </p>
+        <div>
+            <p> "---> For_view() : for" </p>
+            // <p> "The document of this chapter is confused" </p>
 
-        <ForEnumerate
-            each = move || show_y.get()
-            key = |k| k.index
-            children = move |i, k|
-            {
-                view! {
-                        <p> "Index: " {i} " - Count: " {move || k.count.get()} </p>
-                        <button on:click=move |_| k.count.update(|v| *v += 1)>
-                            {move || format!("Value: {}", k.count.get())}
-                        </button>
+            <ForEnumerate
+                each = move || show_y.get()
+                key = |k| k.index
+                children = move |i, k|
+                {
+                    view! {
+                            <p> "Index: " {i} " - Count: " {move || k.count.get()} </p>
+                            <button on:click=move |_| k.count.update(|v| *v += 1)>
+                                {move || format!("Value: {}", k.count.get())}
+                            </button>
+                    }
                 }
-            }
-            />
-
-
-            // <button { move || kc.id } > "Value: " {move || child..get()} </button>
-
-        // </ ForEnumerate>
+                />
+                // <button { move || kc.id } > "Value: " {move || child..get()} </button>
+            // </ ForEnumerate>
+        </div>
     }
 }

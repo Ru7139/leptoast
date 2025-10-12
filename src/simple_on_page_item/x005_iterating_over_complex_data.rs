@@ -23,21 +23,23 @@ pub fn ComplexDataIter() -> impl IntoView {
     ]));
 
     view! {
-        <p> "---> ComplexDataIter()" </p>
-        <button on:click = move |_| {
-            set_data.update(|data| {
-                for row in data { row.value += 2; }
-            });
-            leptos::logging::log!("{:?}", data.get());
-        }> "Update Values +2" </button>
+        <div>
+            <p> "---> ComplexDataIter()" </p>
+            <button on:click = move |_| {
+                set_data.update(|data| {
+                    for row in data { row.value += 2; }
+                });
+                leptos::logging::log!("{:?}", data.get());
+            }> "Update Values +2" </button>
 
-        <For
-            each = move || data.get()
-            key = |state| (state.key.clone(), state.value) // 这里有其他两种写法，这种效率最低
-            let(child) // 每次值发生变化时会丢弃之前的<p>，再重新渲染，这导致效率与UI复杂程度成反比
-        >
-            <p>{child.value}</p>
-        </For>
+            <For
+                each = move || data.get()
+                key = |state| (state.key.clone(), state.value) // 这里有其他两种写法，这种效率最低
+                let(child) // 每次值发生变化时会丢弃之前的<p>，再重新渲染，这导致效率与UI复杂程度成反比
+            >
+                <p>{child.value}</p>
+            </For>
+        </div>
 
     }
 }
@@ -65,22 +67,24 @@ pub fn BetterIterA() -> impl IntoView {
     ]));
 
     view! {
-        <p> "---> BetterIterA()" </p>
-        <button on:click = move |_| {
-            for row in &*data.read() {
-                row.subfec.update(|x| *x += 3);
-            }
-            leptos::logging::log!("{:?}", data.get())
-        }> "Update Values +3" </button>
+        <div>
+            <p> "---> BetterIterA()" </p>
+            <button on:click = move |_| {
+                for row in &*data.read() {
+                    row.subfec.update(|x| *x += 3);
+                }
+                leptos::logging::log!("{:?}", data.get())
+            }> "Update Values +3" </button>
 
-        <For
-            each = move || data.get()
-            key = |state| state.name.clone() // 这种方式很有效
-            let(child) // 缺点在于如果无法控制接收到的数据类型时，可能造成麻烦
+            <For
+                each = move || data.get()
+                key = |state| state.name.clone() // 这种方式很有效
+                let(child) // 缺点在于如果无法控制接收到的数据类型时，可能造成麻烦
 
-        >
-        <p> {child.subfec} </p>
-        </For>
+            >
+            <p> {child.subfec} </p>
+            </For>
+        </div>
     }
 }
 
@@ -95,29 +99,31 @@ pub fn BetterIterMemo() -> impl IntoView {
         ]));
 
     view! {
-        <p> "---> BetterIterMemo()" </p>
-        <button on:click = move |_| {
-            for row in &*data.read() {
-                row.subfec.update(|x| *x += 4);
-            }
-            leptos::logging::log!("{:?}", data.get())
-        }> "Update Values +4" </button>
-
-        <For
-            each = move || data.get().into_iter().enumerate()
-            key = |(_, state)| state.name.clone() // 当data变化时，Memo会重新计算
-            children = move |(index, bacet)| { // 当data内被删除一个对象，Memo也会立即触发一次
-                let value = Memo::new(move |_| { // 如果此处的计算量过大，则应尽可能使用反应信号嵌套
-                    data.with(|vec_basement|
-                        vec_basement.get(index)
-                            .map(|d| d.subfec)
-                            .unwrap_or(RwSignal::new(-1i32)))
-                });
-                view! {
-                    <p> {bacet.name}": "{value} </p>
+        <div>
+            <p> "---> BetterIterMemo()" </p>
+            <button on:click = move |_| {
+                for row in &*data.read() {
+                    row.subfec.update(|x| *x += 4);
                 }
-            }
-        />
+                leptos::logging::log!("{:?}", data.get())
+            }> "Update Values +4" </button>
+
+            <For
+                each = move || data.get().into_iter().enumerate()
+                key = |(_, state)| state.name.clone() // 当data变化时，Memo会重新计算
+                children = move |(index, bacet)| { // 当data内被删除一个对象，Memo也会立即触发一次
+                    let value = Memo::new(move |_| { // 如果此处的计算量过大，则应尽可能使用反应信号嵌套
+                        data.with(|vec_basement|
+                            vec_basement.get(index)
+                                .map(|d| d.subfec)
+                                .unwrap_or(RwSignal::new(-1i32)))
+                    });
+                    view! {
+                        <p> {bacet.name}": "{value} </p>
+                    }
+                }
+            />
+        </div>
     }
 }
 
@@ -156,22 +162,24 @@ pub fn MaybeBestIterStores() -> impl IntoView {
     let saving_data = Store::new(TrsData { octpusline: vec });
 
     view! {
-        <h2> "---> MaybeBestIterStores()" </h2>
-        <button on:click = move |_| {
-            for r in saving_data.octpusline().iter_unkeyed() {
-                *r.inside_item_price().write() += 5;
-            }
-            leptos::logging::log!("{:?}", saving_data.get());
-        }> "Update Values +5" </button>
+        <div>
+            <h2> "---> MaybeBestIterStores()" </h2>
+            <button on:click = move |_| {
+                for r in saving_data.octpusline().iter_unkeyed() {
+                    *r.inside_item_price().write() += 5;
+                }
+                leptos::logging::log!("{:?}", saving_data.get());
+            }> "Update Values +5" </button>
 
-        <For
-            each = move || saving_data.octpusline()
-            key = |row| row.read().name.clone() // 无需手动创造嵌套新号
-            children = |child| { // 新的api，可能存在bug
-                let name = child.read().name.clone();
-                let value = child.inside_item_price();
-                view! { <p> {name} ": " {move || value.get()} </p>}
-            }
-        />
+            <For
+                each = move || saving_data.octpusline()
+                key = |row| row.read().name.clone() // 无需手动创造嵌套新号
+                children = |child| { // 新的api，可能存在bug
+                    let name = child.read().name.clone();
+                    let value = child.inside_item_price();
+                    view! { <p> {name} ": " {move || value.get()} </p>}
+                }
+            />
+        </div>
     }
 }
