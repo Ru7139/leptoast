@@ -13,7 +13,7 @@ use super::super::simple_on_page_item::{
     },
     x007_control_flow::{BetterUseShow, IfControl},
     x008_error_handle::{ErrorBoundary, NumericInput},
-    x009_parentChild_communication::PassTXSignalPlusOne,
+    x009_parentchild_communication::PassTXSignalPlusOne,
 };
 
 #[component]

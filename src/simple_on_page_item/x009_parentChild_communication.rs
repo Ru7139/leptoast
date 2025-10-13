@@ -15,7 +15,10 @@ pub fn PassTXSignalPlusOne(
             </button>
 
             <br/>
-            <UseCallback mouse_click = move |_| tx_signal.update(|x| *x *= 2)/>
+            <UseCallback mouse_click = move |_mouse_click| tx_signal.update(|x| *x *= 2)/>
+
+            <br/>
+            <UseEventListener on:click = move |_mouse_click| tx_signal.update(|x| *x *= 10)/>
 
 
         </div>
@@ -23,10 +26,17 @@ pub fn PassTXSignalPlusOne(
 }
 
 #[component]
-pub fn UseCallback(mouse_click: impl FnMut(MouseEvent) + 'static) -> impl IntoView {
+fn UseCallback(mouse_click: impl FnMut(MouseEvent) + 'static) -> impl IntoView {
     view! {
         <button on:click = mouse_click>
-            "mouse click !!!"
+            "mouse click 2x !!!"
         </button>
+    }
+}
+
+#[component]
+fn UseEventListener() -> impl IntoView {
+    view! {
+        <button> "Multiply 10x" </button>
     }
 }
