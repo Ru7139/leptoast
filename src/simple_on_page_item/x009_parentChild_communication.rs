@@ -40,3 +40,45 @@ fn UseEventListener() -> impl IntoView {
         <button> "Multiply 10x" </button>
     }
 }
+
+#[component]
+pub fn DeeplyNestedComponent() -> impl IntoView {
+    view! {
+        <div>
+            <Layout header_msg = "header: ---> DeeplyNestedComponent()"/>
+        </div>
+    }
+}
+
+#[component]
+fn Layout(header_msg: &'static str) -> impl IntoView {
+    view! {
+        <header>
+            <h1> {header_msg} </h1>
+        </header>
+        <main>
+            <Content/>
+        </main>
+    }
+}
+
+#[component]
+fn Content() -> impl IntoView {
+    view! {
+        <div class="content">
+            <ButtonD/>
+        </div>
+    }
+}
+
+#[component]
+fn ButtonD() -> impl IntoView {
+    let (rx_data, tx_data) = signal(0i32);
+
+    view! {
+        <p> {rx_data} </p>
+        <button on:click = move |_user_click|
+            tx_data.update(|x| { *x += 2})
+        > "use this button to +2" </button>
+    }
+}
