@@ -14,6 +14,7 @@ use super::super::simple_on_page_item::{
     x007_control_flow::{BetterUseShow, IfControl},
     x008_error_handle::{ErrorBoundary, NumericInput},
     x009_parentchild_communication::{DeeplyNestedComponent, PassTXSignalPlusOne},
+    x010_passing_children_to_components::ComponentChildren,
 };
 
 #[component]
@@ -22,6 +23,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <div>
+            <ComponentChildren/>
             <DeeplyNestedComponent/>
             <PassTXSignalPlusOne rx_signal=rx_data tx_signal=tx_data/>
             <ErrorBoundary/>

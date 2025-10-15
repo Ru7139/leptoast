@@ -1,4 +1,5 @@
 mod app_iteself;
+mod common_components;
 mod simple_on_page_item;
 
 fn main() {
