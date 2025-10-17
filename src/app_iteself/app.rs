@@ -14,7 +14,7 @@ use super::super::simple_on_page_item::{
     x007_control_flow::{BetterUseShow, IfControl},
     x008_error_handle::{ErrorBoundary, NumericInput},
     x009_parentchild_communication::{DeeplyNestedComponent, PassTXSignalPlusOne},
-    x010_passing_children_to_components::{ComponentChildren, HiddenMessage},
+    x010_passing_children_to_components::{ComponentChildren, HiddenMessage, WrapsChildren},
 };
 
 #[component]
@@ -23,6 +23,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <div>
+            <WrapsChildren> "A" "B" "C" </WrapsChildren>
             <HiddenMessage/>
             <ComponentChildren/>
             <DeeplyNestedComponent/>

@@ -129,3 +129,17 @@ fn SlotIf(
 //         }
 //     }
 // }
+
+#[component]
+pub fn WrapsChildren(children: ChildrenFragment) -> impl IntoView {
+    let children = children()
+        .nodes
+        .into_iter()
+        .map(|child| view! { <li> {child} </li>})
+        .collect::<Vec<_>>();
+
+    view! {
+        <h1> <code> "<WrapsChildren/>" </code> </h1>
+        <ul> {children} </ul>
+    }
+}
