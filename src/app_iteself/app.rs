@@ -46,8 +46,6 @@ pub fn App() -> impl IntoView {
             <ShowDifferentColor/>
             <TheCouter initial_value=0 step_value=1/>
             <Hello/>
-
-
         </div>
     }
 }

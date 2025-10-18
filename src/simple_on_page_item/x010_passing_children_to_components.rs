@@ -51,8 +51,8 @@ where
 pub fn HiddenMessage() -> impl IntoView {
     let (rx_data, tx_data) = signal(0i32);
     let is_even = Signal::derive(move || rx_data.get() % 2 == 0);
-    let is_div5 = Signal::derive(move || rx_data.get() % 5 == 0);
-    let is_div7 = Signal::derive(move || rx_data.get() % 7 == 0);
+    // let is_div5 = Signal::derive(move || rx_data.get() % 5 == 0);
+    // let is_div7 = Signal::derive(move || rx_data.get() % 7 == 0);
 
     view! {
         <CCFTSectionIndicator title_name = "HiddenMessage"/>
