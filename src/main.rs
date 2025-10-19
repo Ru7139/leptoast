@@ -7,3 +7,5 @@ fn main() {
 
     leptos::mount::mount_to_body(app_iteself::app::App)
 }
+
+// today do nothing
