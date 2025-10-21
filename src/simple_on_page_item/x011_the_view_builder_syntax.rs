@@ -1,6 +1,6 @@
 use leptos::{
-    ev,
-    html::{br, button, div, span},
+    children, ev,
+    html::{br, button, div, p, span},
     prelude::*,
 };
 
@@ -26,14 +26,14 @@ pub fn NoViewAtensionButtonI32(start_value: i32, step_value: i32) -> impl IntoVi
                 write_count.update(|x| *x -= step_value)
             })
             .child("take back a step"),
+        Show(
+            ShowProps::builder()
+                .when(move || read_count.get() > 5)
+                .fallback(|| p().child("I show up until value bigger than 5"))
+                .children(ToChildren::to_children(|| {
+                    p().child("value is bigger than 5")
+                }))
+                .build(),
+        ),
     ))
-
-    // view! {
-    //     <p> {read_count} </p>
-    //     <button on:click = move |_user_input| { write_count.update(|x| *x += step_value); }>
-    //         "read_count +" {step_value}
-    //     </button>
-    //     <br/>
-    // }
-    //
 }
