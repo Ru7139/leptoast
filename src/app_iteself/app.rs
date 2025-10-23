@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 
 use super::super::simple_on_page_item::{
-    x000_aisatsu::Hello,
+    x000_aisatsu::{Hello, HtmlExercise},
     x001_counter::TheCouter,
     x002_dynamic_attributes::ShowDifferentColor,
     x004_iteration::{Forview, VecViewBasic},
@@ -16,6 +16,7 @@ use super::super::simple_on_page_item::{
     x009_parentchild_communication::{DeeplyNestedComponent, PassTXSignalPlusOne},
     x010_passing_children_to_components::{ComponentChildren, HiddenMessage, WrapsChildren},
     x011_the_view_builder_syntax::NoViewAtensionButtonI32,
+    x012_working_with_signal::UseTheSignal,
 };
 
 #[component]
@@ -24,6 +25,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <div>
+            <UseTheSignal/>
             <NoViewAtensionButtonI32 start_value = 10 step_value = 2/>
             <WrapsChildren> "A" "B" "C" </WrapsChildren>
             <HiddenMessage/>
@@ -48,6 +50,8 @@ pub fn App() -> impl IntoView {
             <ShowDifferentColor/>
             <TheCouter initial_value=0 step_value=1/>
             <Hello/>
+            <br/>
+            <HtmlExercise/>
         </div>
     }
 }
