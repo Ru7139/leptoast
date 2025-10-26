@@ -102,4 +102,29 @@ pub fn UseEffect() -> impl IntoView {
     ))
 }
 
+#[component]
+pub fn UseEffectWatch() -> impl IntoView {
+    let (num, set_num) = signal(0i32);
+
+    let effct = Effect::watch(
+        move || num.get(),
+        move |num, prev_num, _| logging::log!("num = {}, pre_num = {:?}", num, prev_num),
+        false,
+    );
+
+    div().child((
+        h3().child("---> UseEffectWatch()"),
+        button()
+            .on(ev::click, move |_click| set_num.set(1))
+            .child("set num = 1"),
+        br(),
+        button()
+            .on(ev::click, move |_click| set_num.update(|x| *x += 1))
+            .child("set num += 1"),
+        br(),
+        button()
+            .on(ev::click, move |_click| effct.stop())
+            .child("to stop effect watch"),
+        br(),
+    ))
 }
