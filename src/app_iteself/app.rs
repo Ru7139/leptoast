@@ -17,7 +17,8 @@ use super::super::simple_on_page_item::{
     x010_passing_children_to_components::{ComponentChildren, HiddenMessage, WrapsChildren},
     x011_the_view_builder_syntax::NoViewAtensionButtonI32,
     x012_working_with_signal::UseTheSignal,
-    x013_responding_to_changes_with_effects::UseEffect,
+    x013_responding_to_changes_with_effects::{UseEffect, UseEffectWatch},
+    x014_reactivity_and_functions::InterludeAndFunctions,
 };
 
 #[component]
@@ -26,6 +27,8 @@ pub fn App() -> impl IntoView {
 
     view! {
         <div>
+            <InterludeAndFunctions/>
+            <UseEffectWatch/>
             <UseEffect/>
             <UseTheSignal/>
             <NoViewAtensionButtonI32 start_value = 10 step_value = 2/>
