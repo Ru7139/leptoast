@@ -10,19 +10,21 @@ pub fn ComponentChildren() -> impl IntoView {
     let (rx_data_1, tx_data_1) = signal(false);
 
     view! {
-        <CCFTSectionIndicator title_name = "ComponentChildren"/>
-        <p>
-        "rx_data_0: " {rx_data_0} " "
-        <ButtonPlusI32 write_signal = tx_data_0 plus_value = 3 button_msg = "+3"/>
-        <br/>
-        "rx_data_1: " {rx_data_1} " "
-        <ButtonToggle write_signal = tx_data_1 button_msg = "toggle"/>
-        </p>
+        <div>
+            <CCFTSectionIndicator title_name = "ComponentChildren"/>
+            <p>
+            "rx_data_0: " {rx_data_0} " "
+            <ButtonPlusI32 write_signal = tx_data_0 plus_value = 3 button_msg = "+3"/>
+            <br/>
+            "rx_data_1: " {rx_data_1} " "
+            <ButtonToggle write_signal = tx_data_1 button_msg = "toggle"/>
+            </p>
 
-        <TakesChildren render_prop = || view! { <p>"Hi, there!"</p> }>
-            "Some text "
-            <span>"A span"</span>
-        </TakesChildren>
+            <TakesChildren render_prop = || view! { <p>"Hi, there!"</p> }>
+                "Some text "
+                <span>"A span"</span>
+            </TakesChildren>
+        </div>
 
 
     }
@@ -55,18 +57,20 @@ pub fn HiddenMessage() -> impl IntoView {
     // let is_div7 = Signal::derive(move || rx_data.get() % 7 == 0);
 
     view! {
-        <CCFTSectionIndicator title_name = "HiddenMessage"/>
-        <p> "rx_data: " {rx_data} </p>
-        <ButtonPlusI32 write_signal = tx_data button_msg = "+1" plus_value = 1/>
-        <ButtonPlusI32 write_signal = tx_data button_msg = "+3" plus_value = 3/>
-        <br/>
+        <div>
+            <CCFTSectionIndicator title_name = "HiddenMessage"/>
+            <p> "rx_data: " {rx_data} </p>
+            <ButtonPlusI32 write_signal = tx_data button_msg = "+1" plus_value = 1/>
+            <ButtonPlusI32 write_signal = tx_data button_msg = "+3" plus_value = 3/>
+            <br/>
 
-        <SlotIf cond = is_even>
-            <Then slot>"even"</Then>
-            // <ElseIf slot cond=is_div5>"divisible by 5"</ElseIf>
-            // <ElseIf slot cond=is_div7>"divisible by 7"</ElseIf>
-            <Fallback slot>"odd"</Fallback>
-        </SlotIf>
+            <SlotIf cond = is_even>
+                <Then slot>"even"</Then>
+                // <ElseIf slot cond=is_div5>"divisible by 5"</ElseIf>
+                // <ElseIf slot cond=is_div7>"divisible by 7"</ElseIf>
+                <Fallback slot>"odd"</Fallback>
+            </SlotIf>
+        </div>
     }
 }
 
@@ -139,7 +143,9 @@ pub fn WrapsChildren(children: ChildrenFragment) -> impl IntoView {
         .collect::<Vec<_>>();
 
     view! {
-        <h1> <code> "<WrapsChildren/>" </code> </h1>
-        <ul> {children} </ul>
+        <div>
+            <h1> <code> "<WrapsChildren/>" </code> </h1>
+            <ul> {children} </ul>
+        </div>
     }
 }
