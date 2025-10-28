@@ -28,30 +28,45 @@ pub fn UseSuspense() -> impl IntoView {
                 },
             })
         })),
-        // p().child((
-        //     "server 3 : ",
-        //     Suspense(|| p().child("loading ......")).child(p().child(move || {
-        //         once.with(|val| match val {
-        //             None => String::new(), // Suspense 在 None 时自动显示 fallback
-        //             Some(v) => match v {
-        //                 Err(e) => format!("Error: {}", e),
-        //                 Ok(s) => format!("value: {}", s),
-        //                 // SuspenseProps::builder()
-        //                 //     .fallback(|| p().child("loading ......"))
-        //                 //     .children(p().child(move || {
-        //                 //         once.with(|val| match val {
-        //                 //             None => String::new(),
-        //                 //             Some(v) => match v {
-        //                 //                 Err(e) => format!("Error: {}", e),
-        //                 //                 Ok(s) => format!("value: {}", s),
-        //             },
-        //         })
-        //     })),
-        // )),
+        Suspense(
+            SuspenseProps::builder()
+                .fallback(|| p().child("Loading... ..."))
+                .children(ToChildren::to_children(move || {
+                    p().child(move || {
+                        once.with(|val| match val {
+                            None => String::new(),
+                            Some(v) => match v {
+                                Err(e) => format!("Error happened: {}", e),
+                                Ok(s) => format!("Value: {}", s),
+                            },
+                        })
+                    })
+                }))
+                .build(),
+        ),
     ))
 }
 
 async fn load_a(the_num: i32) -> Result<String, ServerFnError> {
     logging::log!("get the sentence from server");
     Ok(format!("the num is {}", the_num))
+}
+
+#[component]
+pub fn UseAwait() -> impl IntoView {
+    div().child((
+        h3().child("---> UseAwait()"),
+        Await(
+            AwaitProps::builder()
+                .future(fetch_a_monkey(3))
+                .children(ToChildren::to_children(|valued| {
+                    p().child("w").child("little monkey on the water")
+                }))
+                .build(),
+        ),
+    ))
+}
+
+async fn fetch_a_monkey(banana: i32) -> i32 {
+    banana * 2
 }
