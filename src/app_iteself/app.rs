@@ -25,6 +25,7 @@ use super::super::{
     s1_async::{
         x0_loading_data_with_resource::UseResource,
         x1_suspense::{UseAwait, UseSuspense},
+        x2_transition::UseTransition,
     },
 };
 
@@ -34,6 +35,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <div>
+            <UseTransition/>
             <UseAwait/>
             <UseSuspense/>
             <UseResource/>
