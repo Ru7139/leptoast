@@ -59,9 +59,9 @@ pub fn UseAwait() -> impl IntoView {
         Await(
             AwaitProps::builder()
                 .future(fetch_a_monkey(3))
-                .children(ToChildren::to_children(|valued| {
-                    p().child("w").child("little monkey on the water")
-                }))
+                .children(|valued: &i32| {
+                    p().child(format!("little monkey on the water -> {}", *valued))
+                })
                 .build(),
         ),
     ))
