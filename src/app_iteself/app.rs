@@ -22,7 +22,10 @@ use super::super::{
         x013_responding_to_changes_with_effects::{UseEffect, UseEffectWatch},
         x014_reactivity_and_functions::InterludeAndFunctions,
     },
-    s1_async::{x0_loading_data_with_resource::UseResource, x1_suspense::UseSuspense},
+    s1_async::{
+        x0_loading_data_with_resource::UseResource,
+        x1_suspense::{UseAwait, UseSuspense},
+    },
 };
 
 #[component]
@@ -31,6 +34,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <div>
+            <UseAwait/>
             <UseSuspense/>
             <UseResource/>
             <InterludeAndFunctions/>
