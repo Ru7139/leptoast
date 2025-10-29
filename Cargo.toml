@@ -9,6 +9,8 @@ reactive_stores = "*"
 
 console_error_panic_hook = "*"
 
+gloo-timers = {version = "*", features = ["futures"]}
+
 # tokio = { version = "*", features = ["time", "macros"] }
 rayon = "*"
 walkdir = "*"
