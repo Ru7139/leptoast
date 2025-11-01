@@ -703,6 +703,7 @@ dependencies = [
  "leptos",
  "rayon",
  "reactive_stores",
+ "send_wrapper",
  "walkdir",
 ]
 

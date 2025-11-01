@@ -10,6 +10,7 @@ reactive_stores = "*"
 console_error_panic_hook = "*"
 
 gloo-timers = {version = "*", features = ["futures"]}
+send_wrapper = "*"
 
 # tokio = { version = "*", features = ["time", "macros"] }
 rayon = "*"
