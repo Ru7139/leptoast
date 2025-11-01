@@ -22,7 +22,7 @@ pub fn UseResource() -> impl IntoView {
     // .read()、.with()、.get()，但返回Option<T>而不是T
     // 它们将None一直保持到异步数据加载完成
 
-    div().child((
+    div().attr("class", "UseResource").child((
         h3().child("---> UseResource()"),
         button()
             .on(ev::click, move |_click| set_count.update(|x| *x += 1))

@@ -13,7 +13,7 @@ pub fn UseSuspense() -> impl IntoView {
         |count| async move { load_a(count).await },
     );
 
-    div().child((
+    div().attr("class", "UseSuspense").child((
         h3().child("---> UseSuspense()"),
         button()
             .on(ev::click, move |_click| set_count.update(|x| *x += 1))
@@ -54,7 +54,7 @@ async fn load_a(the_num: i32) -> Result<String, ServerFnError> {
 
 #[component]
 pub fn UseAwait() -> impl IntoView {
-    div().child((
+    div().attr("class", "UseAwait").child((
         h3().child("---> UseAwait()"),
         Await(
             AwaitProps::builder()
